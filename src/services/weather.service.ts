@@ -9,9 +9,7 @@ export default class WeatherService {
     cityName: string
   ): Promise<AxiosResponse<WeatherApiResponse>> {
     try {
-      const weather = await this._apiService.getWeatherData(
-        cityName
-      );
+      const weather = await this._apiService.getWeatherData(cityName);
       return weather;
     } catch (error) {
       console.error("An error occured");
