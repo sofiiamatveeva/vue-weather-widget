@@ -1,5 +1,9 @@
 import axios, { AxiosResponse } from "axios";
-import { BASE_GEO_URL, BASE_WEATHER_URL } from "@/constants/api.constant";
+import {
+  BASE_GEO_URL,
+  BASE_WEATHER_URL,
+  GEO_LIST_LIMIT,
+} from "@/constants/api.constant";
 import { WeatherApiResponse } from "@/interfaces/weather.interfaces";
 import { LocationInfo } from "@/interfaces/location.interfaces";
 
@@ -25,6 +29,7 @@ export default class ApiService {
     const params = new URLSearchParams();
 
     params.set("q", cityName);
+    params.set("limit", GEO_LIST_LIMIT.toString());
     params.set("appid", this._apiKey);
 
     const url = `${this._getGeoInfoUrl}?${params.toString()}`;
