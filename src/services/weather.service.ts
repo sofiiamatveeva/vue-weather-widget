@@ -1,16 +1,17 @@
-import { AxiosResponse } from "axios";
 import ApiService from "./api.service";
 import { WeatherApiResponse } from "@/interfaces/weather.interfaces";
 
 export default class WeatherService {
-  constructor(private _apiService: ApiService) {}
+  private _apiService!: ApiService;
 
-  public async getWeatherByCoordinates(
-    cityName: string
-  ): Promise<AxiosResponse<WeatherApiResponse>> {
+  constructor() {
+    this._apiService = new ApiService();
+  }
+
+  public async getWeatherByCity(cityName: string): Promise<WeatherApiResponse> {
     try {
       const weather = await this._apiService.getWeatherData(cityName);
-      return weather;
+      return weather.data;
     } catch (error) {
       console.error("An error occured");
       throw new Error("Get weather request error");
