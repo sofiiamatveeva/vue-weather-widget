@@ -1,7 +1,11 @@
 export const BASE_WEATHER_URL =
   "https://api.openweathermap.org/data/2.5/weather";
+export const BASE_FORECAST_URL =
+  "https://api.openweathermap.org/data/2.5/forecast";
 export const BASE_GEO_URL = "http://api.openweathermap.org/geo/1.0/direct";
 export const ICON_URL =
-  "https://openweathermap.org/img/wn/{iconId}@{iconScale}.png";
+  "https://openweathermap.org/img/wn/{iconId}@{scale}.png";
 
 export const GEO_LIST_LIMIT = 10;
+export const WEATHER_UNITS = "metric";
+export const MAIN_ICON_SCALE = "2x";

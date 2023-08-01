@@ -19,6 +19,7 @@ export interface WeatherDetails {
   humidity: number;
   sea_level: number;
   grnd_level: number;
+  temp_kf?: number;
 }
 
 export interface WindDetails {
@@ -81,4 +82,47 @@ export interface WeatherComponentData {
   humidity: number;
   visibility: number;
   wind: WeatherComponentWind;
+}
+
+export interface ForecastSysData {
+  pod: string;
+}
+
+export interface CityInfo {
+  id: number;
+  name: string;
+  coord: Coordinates;
+  country: string;
+  population: number;
+  timezone: number;
+  sunrise: number;
+  sunset: number;
+}
+
+export interface ForecastItem {
+  dt: number;
+  main: WeatherDetails;
+  weather: WeatherData[];
+  clouds: CloudsData;
+  wind: WindDetails;
+  visibility: number;
+  pop: number;
+  rain: RainData;
+  sys: ForecastSysData;
+  dt_txt: string;
+}
+
+export interface ForecastApiResponse {
+  cod: string;
+  message: number;
+  cnt: number;
+  list: ForecastItem[];
+  city: CityInfo;
+}
+
+export interface ForecastComponentData {
+  date: string;
+  time: string;
+  degrees: number;
+  iconLink: string;
 }
