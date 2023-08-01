@@ -1,10 +1,16 @@
-<template>Weather Widget</template>
+<template>
+  <weather-widget></weather-widget>
+</template>
 
 <script lang="ts">
-import { Vue } from "vue-class-component";
+import WeatherWidget from "./components/WeatherWidget.vue";
+import { defineComponent } from "vue";
 
-export default class App extends Vue {}
+export default defineComponent({
+  components: {
+    WeatherWidget,
+  },
+});
 </script>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>
