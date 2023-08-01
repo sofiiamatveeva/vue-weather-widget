@@ -11,7 +11,11 @@ export default class LocationService {
   public async getCitiesList(query: string): Promise<string[]> {
     try {
       const cities = await this._apiService.getGeoInfo(query);
-      return cities.data.map((location: LocationInfo) => location.name);
+      const citiesList = cities.data.map(
+        (location: LocationInfo) => location.name
+      );
+
+      return Array.from(new Set(citiesList));
     } catch (error) {
       console.error("An error occured");
       throw new Error("Get weather request error");

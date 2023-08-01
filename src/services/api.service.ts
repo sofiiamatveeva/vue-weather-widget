@@ -53,6 +53,7 @@ export default class ApiService {
     const params = new URLSearchParams();
 
     params.set("q", cityName);
+    params.set("units", this._weatherDataUnits);
     params.set("appid", this._apiKey);
 
     const url = this._urlFactory(this._weatherForecastUrl, params);
