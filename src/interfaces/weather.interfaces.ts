@@ -59,3 +59,26 @@ export interface WeatherApiResponse {
   name: string;
   cod: number;
 }
+
+export interface CommonWeatherInfo {
+  country: string;
+  cityName: string;
+  degrees: number;
+  feelsLike: number;
+  sky: string;
+  description: string;
+  iconLink: string;
+}
+
+export interface WeatherComponentWind {
+  speed: number;
+  direction: number;
+}
+
+export interface WeatherComponentData {
+  commonInfo: CommonWeatherInfo;
+  pressure: number;
+  humidity: number;
+  visibility: number;
+  wind: WeatherComponentWind;
+}
