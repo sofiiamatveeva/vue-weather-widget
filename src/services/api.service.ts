@@ -1,6 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import {
   BASE_FORECAST_URL,
+  BASE_GEO_REVERSE_URL,
   BASE_GEO_URL,
   BASE_WEATHER_URL,
   GEO_LIST_LIMIT,
@@ -20,6 +21,8 @@ export default class ApiService {
   private _weatherDataUnits: string = WEATHER_UNITS;
   private _weatherForecastUrl: string = BASE_FORECAST_URL;
   private _iconLink: string = ICON_URL;
+  private _getReverseGeoInfoUrl: string = BASE_GEO_REVERSE_URL;
+  private _geoListLimit: number = GEO_LIST_LIMIT;
 
   public getWeatherData(
     cityName: string
@@ -35,11 +38,27 @@ export default class ApiService {
     return axios.get<WeatherApiResponse>(url);
   }
 
+  public getCityNameByLocation(
+    lon: number,
+    lat: number
+  ): Promise<AxiosResponse<LocationInfo[]>> {
+    const params = new URLSearchParams();
+
+    params.set("lon", lon.toString());
+    params.set("lat", lat.toString());
+    params.set("limit", this._geoListLimit.toString());
+    params.set("appid", this._apiKey);
+
+    const url = this._urlFactory(this._getReverseGeoInfoUrl, params);
+
+    return axios.get<LocationInfo[]>(url);
+  }
+
   public getGeoInfo(cityName: string): Promise<AxiosResponse<LocationInfo[]>> {
     const params = new URLSearchParams();
 
     params.set("q", cityName);
-    params.set("limit", GEO_LIST_LIMIT.toString());
+    params.set("limit", this._geoListLimit.toString());
     params.set("appid", this._apiKey);
 
     const url = this._urlFactory(this._getGeoInfoUrl, params);

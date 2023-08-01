@@ -21,4 +21,22 @@ export default class LocationService {
       throw new Error("Get weather request error");
     }
   }
+
+  public async getCitiesByCoordinates(
+    lon: number,
+    lat: number
+  ): Promise<string[]> {
+    try {
+      const cities = await this._apiService.getCityNameByLocation(lon, lat);
+
+      const citiesList = cities.data.map(
+        (location: LocationInfo) => location.name
+      );
+
+      return Array.from(new Set(citiesList));
+    } catch (error) {
+      console.error("An error occured");
+      throw new Error("Get cities list by coordinates request error");
+    }
+  }
 }
