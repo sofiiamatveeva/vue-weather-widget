@@ -32,7 +32,7 @@
       </li>
     </ul>
   </div>
-  <draggable tag="ul" :list="citiesList" handle=".handle">
+  <draggable tag="ul" :list="citiesList" handle=".handle" item-key="element">
     <template #item="{ element }">
       <li class="flex items-center h-fit p-2 border rounded-lg bg-slate-100">
         <Icon
