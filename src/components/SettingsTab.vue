@@ -32,30 +32,34 @@
       </li>
     </ul>
   </div>
-  <ul class="cities-list">
-    <li
-      class="flex items-center h-fit p-2 border rounded-lg bg-slate-100"
-      v-for="(cityItem, index) in citiesList"
-      :key="index"
-    >
-      <Icon icon="icon-park:drag" width="16" height="16" />
-      <span class="ml-3">{{ cityItem }}</span>
-      <button @click="deleteCity(cityItem)" class="ml-auto" type="button">
+  <draggable tag="ul" :list="citiesList" handle=".handle">
+    <template #item="{ element }">
+      <li class="flex items-center h-fit p-2 border rounded-lg bg-slate-100">
         <Icon
-          class="hover:text-blue-600"
-          icon="mi:delete"
+          class="handle hover:text-blue-600 active:text-black hover:cursor-pointer"
+          icon="icon-park-outline:drag"
           width="16"
-          height="16"
+          height="24"
         />
-      </button>
-    </li>
-  </ul>
+        <span class="ml-3">{{ element }}</span>
+        <button @click="deleteCity(element)" class="ml-auto" type="button">
+          <Icon
+            class="hover:text-blue-600"
+            icon="mi:delete"
+            width="16"
+            height="16"
+          />
+        </button>
+      </li>
+    </template>
+  </draggable>
 </template>
 <style lang="scss"></style>
 <script lang="ts">
 import { defineComponent } from "vue";
 import { mapMutations, mapState } from "vuex";
 import { Icon } from "@iconify/vue";
+import draggable from "vuedraggable";
 import LocationService from "@/services/location.service";
 import { SettingsTabData } from "@/interfaces/components.interfaces";
 
@@ -71,6 +75,7 @@ export default defineComponent({
   },
   components: {
     Icon,
+    draggable,
   },
   computed: {
     ...mapState(["citiesList"]),
