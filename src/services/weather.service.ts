@@ -1,10 +1,10 @@
 import { MAIN_ICON_SCALE } from "@/constants/api.constant";
-import ApiService from "./api.service";
 import {
   ForecastComponentData,
   ForecastItem,
   WeatherComponentData,
 } from "@/interfaces/weather.interfaces";
+import ApiService from "./api.service";
 
 export default class WeatherService {
   private _apiService!: ApiService;

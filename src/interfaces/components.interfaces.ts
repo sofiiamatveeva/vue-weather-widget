@@ -1,5 +1,5 @@
-import WeatherService from "@/services/weather.service";
 import { CommonWeatherInfo, ForecastComponentData, WeatherComponentWind } from "./weather.interfaces";
+import WeatherService from "@/services/weather.service";
 import LocationService from "@/services/location.service";
 
 export interface CityWeatherData {
@@ -19,5 +19,16 @@ export interface SettingsTabData {
 	selectedCity: string;
 	addDisabled: boolean;
   autocompleteList: string[];
+  locationService: LocationService;
+}
+
+export interface State {
+  citiesList: string[];
+}
+
+export interface WeatherWidgetData {
+  cities: string[];
+  isSettingsMode: boolean;
+  askForLocation: boolean;
   locationService: LocationService;
 }

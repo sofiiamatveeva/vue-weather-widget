@@ -32,21 +32,15 @@
 </template>
 
 <script lang="ts">
-import LocationService from "@/services/location.service";
 import { defineComponent } from "vue";
 import { mapMutations, mapState } from "vuex";
+import { WeatherWidgetData } from "@/interfaces/components.interfaces";
+import LocationService from "@/services/location.service";
 import CityWeatherCard from "./CityWeatherCard.vue";
 import SettingsTab from "./SettingsTab.vue";
 
-interface DataProps {
-  cities: string[];
-  isSettingsMode: boolean;
-  askForLocation: boolean;
-  locationService: LocationService;
-}
-
 export default defineComponent({
-  data(): DataProps {
+  data(): WeatherWidgetData {
     return {
       cities: [],
       isSettingsMode: false,

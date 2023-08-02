@@ -1,9 +1,6 @@
 import { InjectionKey } from "vue";
 import { Store, createStore } from "vuex";
-
-interface State {
-  citiesList: string[];
-}
+import { State } from "@/interfaces/components.interfaces";
 
 export const key: InjectionKey<Store<State>> = Symbol();
 

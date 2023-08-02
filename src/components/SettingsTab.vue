@@ -66,9 +66,9 @@ import { defineComponent } from "vue";
 import { mapMutations, mapState } from "vuex";
 import { Icon } from "@iconify/vue";
 import draggable from "vuedraggable";
+import { store } from "@/store/store";
 import LocationService from "@/services/location.service";
 import { SettingsTabData } from "@/interfaces/components.interfaces";
-import { store } from "@/store/store";
 
 export default defineComponent({
   data(): SettingsTabData {

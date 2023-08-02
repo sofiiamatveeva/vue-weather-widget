@@ -3,8 +3,8 @@
 </template>
 
 <script lang="ts">
-import WeatherWidget from "./components/WeatherWidget.vue";
 import { defineComponent } from "vue";
+import WeatherWidget from "./components/WeatherWidget.vue";
 
 export default defineComponent({
   components: {
@@ -12,5 +12,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style lang="scss"></style>
