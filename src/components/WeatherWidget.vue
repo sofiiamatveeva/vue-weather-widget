@@ -1,8 +1,8 @@
 <template>
   <div class="w-80 m-6 p-3 border rounded-lg">
     <header class="flex items-center h-14">
-      <h1 v-if="!isSettingsMode" class="text-lg">Weather</h1>
-      <h1 v-if="isSettingsMode" class="text-lg">Widget Settings</h1>
+      <h1 v-show="!isSettingsMode" class="text-lg">Weather</h1>
+      <h1 v-show="isSettingsMode" class="text-lg">Widget Settings</h1>
       <button
         class="ml-auto hover:text-blue-300"
         type="button"
@@ -30,17 +30,17 @@
         No
       </button>
     </div>
-    <div v-if="isSettingsMode">
+    <div v-show="isSettingsMode">
       <SettingsTab />
     </div>
-    <div v-if="!isSettingsMode">
+    <div v-show="!isSettingsMode">
       <CityWeatherCard
         v-for="cityItem in citiesList"
         :key="cityItem"
         :city="cityItem"
       />
       <div
-        v-if="!citiesList.length && askForLocation"
+        v-show="!citiesList.length && askForLocation"
         class="text-center text-blue-400"
       >
         <span class="font-bold">There are no chosen cities.</span> <br />
