@@ -39,6 +39,13 @@
         :key="cityItem"
         :city="cityItem"
       />
+      <div
+        v-if="!citiesList.length && askForLocation"
+        class="text-center text-blue-400"
+      >
+        <span class="font-bold">There are no chosen cities.</span> <br />
+        <span>Add city in settings or allow access to your location.</span>
+      </div>
     </div>
   </div>
 </template>
