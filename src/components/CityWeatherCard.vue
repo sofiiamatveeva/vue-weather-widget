@@ -27,8 +27,8 @@
             >
               <Icon icon="wi:direction-up" width="24" height="24" />
             </span>
-            <span class="ml-2">{{ wind.speed }}</span>
-            <span class="leading-6 ml-1"> SSE</span>
+            <span class="ml-2">{{ wind.speed.toFixed(1) }}</span>
+            <span class="leading-6 ml-1"> km/h</span>
           </p>
           <p title="Pressure" class="flex w-22 ml-4 hover:text-blue-400">
             <Icon class="mr-2" icon="carbon:pressure" width="24" height="24" />
