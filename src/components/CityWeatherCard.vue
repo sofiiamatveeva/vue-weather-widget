@@ -98,12 +98,14 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { Icon } from "@iconify/vue";
+import { useToast } from "vue-toast-notification";
 import {
   ForecastComponentData,
   WeatherComponentData,
 } from "@/interfaces/weather.interfaces";
 import { CityWeatherData } from "@/interfaces/components.interfaces";
 import WeatherService from "@/services/weather.service";
+import { mapMutations } from "vuex";
 
 export default defineComponent({
   name: "CityWeatherCard",
@@ -137,6 +139,7 @@ export default defineComponent({
       weatherService: new WeatherService(),
       isLoadingWeather: true,
       isLoadingForecast: true,
+      toastNotify: useToast(),
     };
   },
   created(): void {
@@ -144,6 +147,7 @@ export default defineComponent({
     this.fetchForecast();
   },
   methods: {
+    ...mapMutations(["deleteCity"]),
     fetchWeather(): void {
       if (!this.city) return;
 
@@ -158,8 +162,9 @@ export default defineComponent({
           this.isLoadingWeather = false;
         })
         .catch((error) => {
+          this.deleteCity(this.city);
+          this.toastNotify.error("City not found");
           console.error(error);
-          throw Error("An error of fetching weather data occured");
         });
     },
     fetchForecast(): void {
@@ -173,7 +178,6 @@ export default defineComponent({
         })
         .catch((error) => {
           console.error(error);
-          throw Error("An error of fetching weather data occured");
         });
     },
   },

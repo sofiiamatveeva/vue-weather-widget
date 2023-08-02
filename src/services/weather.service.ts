@@ -5,6 +5,7 @@ import {
   WeatherComponentData,
 } from "@/interfaces/weather.interfaces";
 import ApiService from "./api.service";
+import { AxiosError } from "axios";
 
 export default class WeatherService {
   private _apiService!: ApiService;
@@ -44,9 +45,8 @@ export default class WeatherService {
       };
 
       return handledWeatherData;
-    } catch (error) {
-      console.error("An error occured");
-      throw new Error("Get weather request error");
+    } catch (error: any) {
+      throw new Error(error.message);
     }
   }
 
@@ -82,9 +82,9 @@ export default class WeatherService {
       });
 
       return handledForecastData;
-    } catch (error) {
-      console.error("An error occured");
-      throw new Error("Get weather forecast request error");
+    } catch (error: any) {
+      console.error(error);
+      throw new Error(error.message);
     }
   }
 }

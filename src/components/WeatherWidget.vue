@@ -54,6 +54,7 @@
 import { defineComponent } from "vue";
 import { mapMutations, mapState } from "vuex";
 import { Icon } from "@iconify/vue";
+import { useToast } from "vue-toast-notification";
 import { WeatherWidgetData } from "@/interfaces/components.interfaces";
 import LocationService from "@/services/location.service";
 import CityWeatherCard from "./CityWeatherCard.vue";
@@ -71,6 +72,7 @@ export default defineComponent({
       isSettingsMode: false,
       askForLocation: true,
       locationService: new LocationService(),
+      toastNotify: useToast(),
     };
   },
   computed: {
@@ -108,6 +110,7 @@ export default defineComponent({
           },
           (error) => {
             console.error(error);
+            this.toastNotify.error("Could not define your location");
           }
         );
       }
@@ -121,7 +124,6 @@ export default defineComponent({
         })
         .catch((error) => {
           console.error(error);
-          throw Error("An error of fetching cities list data occured");
         });
     },
   },

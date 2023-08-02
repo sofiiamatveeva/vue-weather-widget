@@ -1,6 +1,7 @@
 import { CommonWeatherInfo, ForecastComponentData, WeatherComponentWind } from "./weather.interfaces";
 import WeatherService from "@/services/weather.service";
 import LocationService from "@/services/location.service";
+import { ToastPluginApi } from "vue-toast-notification";
 
 export interface CityWeatherData {
   commonInfo: CommonWeatherInfo;
@@ -12,6 +13,7 @@ export interface CityWeatherData {
   weatherService: WeatherService;
 	isLoadingWeather: boolean;
   isLoadingForecast: boolean;
+  toastNotify: ToastPluginApi;
 }
 
 export interface SettingsTabData {
@@ -31,4 +33,5 @@ export interface WeatherWidgetData {
   isSettingsMode: boolean;
   askForLocation: boolean;
   locationService: LocationService;
+  toastNotify: ToastPluginApi;
 }

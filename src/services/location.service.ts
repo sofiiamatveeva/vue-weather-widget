@@ -16,9 +16,9 @@ export default class LocationService {
       );
 
       return Array.from(new Set(citiesList));
-    } catch (error) {
-      console.error("An error occured");
-      throw new Error("Get weather request error");
+    } catch (error: any) {
+      console.error(error);
+      throw new Error(error.message);
     }
   }
 
@@ -34,9 +34,9 @@ export default class LocationService {
       );
 
       return Array.from(new Set(citiesList));
-    } catch (error) {
-      console.error("An error occured");
-      throw new Error("Get cities list by coordinates request error");
+    } catch (error: any) {
+      console.error(error);
+      throw new Error(error);
     }
   }
 }
