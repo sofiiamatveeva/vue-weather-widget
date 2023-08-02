@@ -11,36 +11,61 @@
         <div class="flex items-center justify-center">
           <img alt="Weather Icon" :src="commonInfo.iconLink" />
           <p class="flex flex-col">
-            <span>{{ commonInfo.degrees }}</span>
-            <span class="text-xs">Feels like: {{ commonInfo.feelsLike }}</span>
+            <span class="text-4xl">
+              {{ Math.floor(commonInfo.degrees) }} &#176;C</span
+            >
+            <span class="text-xs">
+              Feels like: {{ Math.floor(commonInfo.feelsLike) }} &#176;C
+            </span>
           </p>
         </div>
-        <div class="flex justify-around">
-          <p class="flex">
-            <Icon icon="fluent-mdl2:wind-direction" width="24" height="24" />
-            {{ wind.speed }} SSE
+        <div class="grid grid-cols-2 justify-around">
+          <p title="Wind" class="flex w-22 ml-4 hover:text-blue-400">
+            <span
+              class="origin-center"
+              :style="{ transform: 'rotate(' + wind.direction + 'deg)' }"
+            >
+              <Icon icon="wi:direction-up" width="24" height="24" />
+            </span>
+            <span class="ml-2">{{ wind.speed }}</span>
+            <span class="leading-6 ml-1"> SSE</span>
           </p>
-          <p class="flex">
+          <p title="Pressure" class="flex w-22 ml-4 hover:text-blue-400">
+            <Icon class="mr-2" icon="carbon:pressure" width="24" height="24" />
+            {{ pressure }}
+            <span class="leading-6 ml-1">pHa</span>
+          </p>
+        </div>
+        <div class="grid grid-cols-2 justify-around mt-6">
+          <p title="Humidity" class="flex w-22 ml-4 hover:text-blue-400">
             <Icon
-              icon="material-symbols:blood-pressure-outline-rounded"
+              class="mr-2"
+              icon="carbon:humidity-alt"
               width="24"
               height="24"
             />
-            {{ pressure }} pHa
+            {{ humidity }}
+            <span class="leading-6 ml-1">%</span>
           </p>
-        </div>
-        <div class="flex justify-around text-sm mt-6">
-          <p>Humidity: {{ humidity }}</p>
-          <p>Visibility: {{ visibility }}</p>
+          <p title="Visibility" class="flex w-22 ml-4 hover:text-blue-400">
+            <Icon
+              class="mr-2"
+              icon="icons8:binoculars"
+              width="24"
+              height="24"
+            />
+            {{ visibility / 1000 }}
+            <span class="leading-6 ml-1">km</span>
+          </p>
         </div>
         <p class="flex justify-center capitalize mt-3">
           {{ commonInfo.sky }}.
           {{ commonInfo.description }}
         </p>
       </div>
-      <footer class="flex mt-6 overflow-x-auto">
+      <footer class="forecast-wrapper flex mt-6 overflow-x-auto">
         <div
-          class="flex-1 grow-0 shrink-0 basis-1/4 justify-center px-1 mx-3 text-xs"
+          class="flex-1 grow-0 shrink-0 basis-1/4 justify-center px-1 pb-2 mx-3 text-xs"
           v-for="(forecastItem, index) in forecast"
           :key="index"
         >
@@ -49,7 +74,9 @@
             alt="Forecast Icon"
             :src="forecastItem.iconLink"
           />
-          <p class="text-center">{{ forecastItem.degrees }}</p>
+          <p class="text-center">
+            {{ Math.floor(forecastItem.degrees) }}&#176;C
+          </p>
           <p class="text-center">{{ forecastItem.date }}</p>
           <p class="text-center">{{ forecastItem.time }}</p>
         </div>
@@ -152,3 +179,15 @@ export default defineComponent({
   },
 });
 </script>
+<style lang="scss">
+.forecast-wrapper {
+  &::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    background-color: rgb(147 197 253);
+  }
+}
+</style>
