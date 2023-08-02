@@ -54,6 +54,15 @@ export default defineComponent({
       locationService: new LocationService(),
     };
   },
+  mounted(): void {
+    if (localStorage.citiesList) {
+      const savedCitiesList = JSON.parse(localStorage.citiesList);
+
+      savedCitiesList.forEach((city: string) => {
+        this.addCity(city);
+      });
+    }
+  },
   computed: {
     ...mapState(["citiesList"]),
   },

@@ -32,7 +32,13 @@
       </li>
     </ul>
   </div>
-  <draggable tag="ul" :list="citiesList" handle=".handle" item-key="element">
+  <draggable
+    tag="ul"
+    :list="citiesList"
+    handle=".handle"
+    item-key="element"
+    @end="onDragEnd"
+  >
     <template #item="{ element }">
       <li class="flex items-center h-fit p-2 border rounded-lg bg-slate-100">
         <Icon
@@ -62,6 +68,7 @@ import { Icon } from "@iconify/vue";
 import draggable from "vuedraggable";
 import LocationService from "@/services/location.service";
 import { SettingsTabData } from "@/interfaces/components.interfaces";
+import { store } from "@/store/store";
 
 export default defineComponent({
   data(): SettingsTabData {
@@ -73,6 +80,7 @@ export default defineComponent({
       locationService: new LocationService(),
     };
   },
+  store: store,
   components: {
     Icon,
     draggable,
@@ -102,6 +110,9 @@ export default defineComponent({
       this.inputCity = selectedCity;
       this.selectedCity = selectedCity;
       this.autocompleteList = [];
+    },
+    onDragEnd(): void {
+      store.commit("saveToLocalStorage");
     },
   },
   watch: {

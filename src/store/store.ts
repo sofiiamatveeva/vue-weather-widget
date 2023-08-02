@@ -14,13 +14,20 @@ export const store: Store<State> = createStore<State>({
     };
   },
   mutations: {
-    addCity(state: State, newCity: string) {
+    addCity(state: State, newCity: string): void {
       state.citiesList.push(newCity);
+
+      store.commit("saveToLocalStorage");
     },
-    deleteCity(state: State, cityToDelete: string) {
+    deleteCity(state: State, cityToDelete: string): void {
       state.citiesList = state.citiesList.filter((city) => {
         return city !== cityToDelete;
       });
+
+      store.commit("saveToLocalStorage");
+    },
+    saveToLocalStorage(state: State): void {
+      localStorage.setItem("citiesList", JSON.stringify(state.citiesList));
     },
   },
 });
