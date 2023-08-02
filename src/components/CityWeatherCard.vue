@@ -80,13 +80,13 @@ import WeatherService from "@/services/weather.service";
 
 export default defineComponent({
   name: "CityWeatherCard",
+  components: {
+    Icon,
+  },
   props: {
     city: {
       type: String,
     },
-  },
-  components: {
-    Icon,
   },
   data(): CityWeatherData {
     return {

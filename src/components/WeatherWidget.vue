@@ -40,6 +40,11 @@ import CityWeatherCard from "./CityWeatherCard.vue";
 import SettingsTab from "./SettingsTab.vue";
 
 export default defineComponent({
+  name: "WeatherWidget",
+  components: {
+    CityWeatherCard,
+    SettingsTab,
+  },
   data(): WeatherWidgetData {
     return {
       cities: [],
@@ -47,6 +52,9 @@ export default defineComponent({
       askForLocation: true,
       locationService: new LocationService(),
     };
+  },
+  computed: {
+    ...mapState(["citiesList"]),
   },
   mounted(): void {
     if (localStorage.citiesList) {
@@ -56,13 +64,6 @@ export default defineComponent({
         this.addCity(city);
       });
     }
-  },
-  computed: {
-    ...mapState(["citiesList"]),
-  },
-  components: {
-    CityWeatherCard,
-    SettingsTab,
   },
   methods: {
     ...mapMutations(["addCity"]),

@@ -71,6 +71,11 @@ import LocationService from "@/services/location.service";
 import { SettingsTabData } from "@/interfaces/components.interfaces";
 
 export default defineComponent({
+  name: "SettingsTab",
+  components: {
+    Icon,
+    draggable,
+  },
   data(): SettingsTabData {
     return {
       inputCity: "",
@@ -80,13 +85,25 @@ export default defineComponent({
       locationService: new LocationService(),
     };
   },
-  store: store,
-  components: {
-    Icon,
-    draggable,
-  },
   computed: {
     ...mapState(["citiesList"]),
+  },
+  watch: {
+    inputCity(): void {
+      this.addDisabled = this.inputCity !== this.selectedCity;
+
+      if (!this.inputCity) {
+        this.selectedCity = "";
+        return;
+      }
+
+      if (this.inputCity === this.selectedCity) {
+        this.autocompleteList = [];
+        return;
+      }
+
+      this.getAutocompleteList(this.inputCity);
+    },
   },
   methods: {
     ...mapMutations(["addCity", "deleteCity"]),
@@ -115,22 +132,6 @@ export default defineComponent({
       store.commit("saveToLocalStorage");
     },
   },
-  watch: {
-    inputCity(): void {
-      this.addDisabled = this.inputCity !== this.selectedCity;
-
-      if (!this.inputCity) {
-        this.selectedCity = "";
-        return;
-      }
-
-      if (this.inputCity === this.selectedCity) {
-        this.autocompleteList = [];
-        return;
-      }
-
-      this.getAutocompleteList(this.inputCity);
-    },
-  },
+  store: store,
 });
 </script>
