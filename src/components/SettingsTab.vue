@@ -4,6 +4,9 @@
       <input
         class="w-full py-1 pl-3 pr-8 border rounded-lg outline-none"
         v-model="inputCity"
+        @keydown.down.prevent="downList"
+        @keydown.up.prevent="upList"
+        @keydown.enter="selectOnEnter"
       />
       <button
         class="absolute right-2 hover:text-blue-300 disabled:text-blue-100"
@@ -16,15 +19,17 @@
     <ul
       v-if="autocompleteList.length && inputCity.length"
       class="absolute z-100 w-full p-1 border rounded-lg bg-white"
+      ref="autocompleteList"
     >
       <li
         class="py-0.5 px-1"
-        v-for="autocompleteItem in autocompleteList"
+        v-for="(autocompleteItem, index) in autocompleteList"
         :key="autocompleteItem"
       >
         <button
           @click="selectCity(autocompleteItem)"
           class="w-full p-1 text-start rounded-md hover:bg-blue-300"
+          :class="{ 'bg-blue-300': index === listCityIndex }"
           type="button"
         >
           {{ autocompleteItem }}
@@ -82,6 +87,7 @@ export default defineComponent({
       selectedCity: "",
       addDisabled: true,
       autocompleteList: [],
+      listCityIndex: -1,
       locationService: new LocationService(),
     };
   },
@@ -130,6 +136,28 @@ export default defineComponent({
     },
     onDragEnd(): void {
       store.commit("saveToLocalStorage");
+    },
+    downList(): void {
+      const listLength = this.autocompleteList.length;
+
+      if (this.listCityIndex < listLength - 1) {
+        this.listCityIndex++;
+      }
+    },
+    upList(): void {
+      if (this.listCityIndex > 0) {
+        this.listCityIndex--;
+      }
+    },
+    selectOnEnter(): void {
+      if (this.listCityIndex > -1) {
+        const selectedCity = this.autocompleteList[this.listCityIndex];
+
+        this.selectCity(selectedCity);
+        this.addCityToStore();
+
+        this.listCityIndex = -1;
+      }
     },
   },
   store: store,

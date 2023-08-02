@@ -19,6 +19,7 @@ export interface SettingsTabData {
 	selectedCity: string;
 	addDisabled: boolean;
   autocompleteList: string[];
+  listCityIndex: number;
   locationService: LocationService;
 }
 
