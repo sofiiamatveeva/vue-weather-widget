@@ -38,6 +38,7 @@
     </ul>
   </div>
   <draggable
+    class="mt-6"
     tag="ul"
     :list="citiesList"
     handle=".handle"
@@ -45,7 +46,9 @@
     @end="onDragEnd"
   >
     <template #item="{ element }">
-      <li class="flex items-center h-fit p-2 border rounded-lg bg-slate-100">
+      <li
+        class="flex items-center h-fit p-2 my-1 border rounded-lg bg-slate-100"
+      >
         <Icon
           class="handle hover:text-blue-600 active:text-black hover:cursor-pointer"
           icon="icon-park-outline:drag"
