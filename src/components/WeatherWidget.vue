@@ -68,7 +68,6 @@ export default defineComponent({
   },
   data(): WeatherWidgetData {
     return {
-      cities: [],
       isSettingsMode: false,
       askForLocation: true,
       locationService: new LocationService(),

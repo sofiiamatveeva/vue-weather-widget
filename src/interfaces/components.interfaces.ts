@@ -27,7 +27,6 @@ export interface State {
 }
 
 export interface WeatherWidgetData {
-  cities: string[];
   isSettingsMode: boolean;
   askForLocation: boolean;
   locationService: LocationService;
