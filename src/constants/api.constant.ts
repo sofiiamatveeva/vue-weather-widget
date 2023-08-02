@@ -8,6 +8,6 @@ export const BASE_GEO_REVERSE_URL =
 export const ICON_URL =
   "https://openweathermap.org/img/wn/{iconId}@{scale}.png";
 
-export const GEO_LIST_LIMIT = 10;
+export const GEO_LIST_LIMIT = 3;
 export const WEATHER_UNITS = "metric";
 export const MAIN_ICON_SCALE = "2x";

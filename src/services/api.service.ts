@@ -17,7 +17,7 @@ import { LocationInfo } from "@/interfaces/location.interfaces";
 export default class ApiService {
   private _getWeatherUrl: string = BASE_WEATHER_URL;
   private _getGeoInfoUrl: string = BASE_GEO_URL;
-  private _apiKey = "c46753eb451a07012130f506fff5f978";
+  private _apiKey = "83bbbb38810d5047746bc6760a82aa2e";
   private _weatherDataUnits: string = WEATHER_UNITS;
   private _weatherForecastUrl: string = BASE_FORECAST_URL;
   private _iconLink: string = ICON_URL;

@@ -1,5 +1,5 @@
 <template>
-  <div class="w-80 min-h-[395px] border rounded-lg my-1.5 p-3">
+  <div class="w-full min-h-[395px] border rounded-lg my-1.5 p-3">
     <div v-if="!isLoadingWeather && !isLoadingForecast">
       <header class="text-xl text-center">
         <p>
