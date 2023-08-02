@@ -57,7 +57,7 @@ export default defineComponent({
     ...mapState(["citiesList"]),
   },
   mounted(): void {
-    if (localStorage.citiesList) {
+    if (localStorage.citiesList && !this.citiesList.length) {
       const savedCitiesList = JSON.parse(localStorage.citiesList);
 
       savedCitiesList.forEach((city: string) => {
