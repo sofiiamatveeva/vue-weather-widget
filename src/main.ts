@@ -9,4 +9,4 @@ const app = createApp(App);
 app.use(ToastPlugin);
 app.use(store, key);
 
-app.mount("#app");
+app.mount("weather-widget");
