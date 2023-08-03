@@ -71,8 +71,6 @@ export default defineComponent({
     return {
       isSettingsMode: false,
       askForLocation: true,
-      locationService: new LocationService(),
-      toastNotify: useToast(),
     };
   },
   computed: {
@@ -98,6 +96,7 @@ export default defineComponent({
   methods: {
     ...mapMutations(["addCity"]),
     getLocation(access: boolean): void {
+      const toastNotify = useToast();
       this.askForLocation = false;
 
       if (access) {
@@ -110,13 +109,14 @@ export default defineComponent({
           },
           (error) => {
             console.error(error);
-            this.toastNotify.error("Could not define your location");
+            toastNotify.error("Could not define your location");
           }
         );
       }
     },
     getCityNameByCoords(lon: number, lat: number): void {
-      this.locationService
+      const locationService = new LocationService();
+      locationService
         .getCitiesByCoordinates(lon, lat)
         .then((cities: string[]) => {
           const currentCity = cities[0];

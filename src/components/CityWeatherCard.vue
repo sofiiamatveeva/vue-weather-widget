@@ -136,10 +136,8 @@ export default defineComponent({
         direction: 0,
       },
       forecast: [],
-      weatherService: new WeatherService(),
       isLoadingWeather: true,
       isLoadingForecast: true,
-      toastNotify: useToast(),
     };
   },
   created(): void {
@@ -151,7 +149,9 @@ export default defineComponent({
     fetchWeather(): void {
       if (!this.city) return;
 
-      this.weatherService
+      const weatherService = new WeatherService();
+      const toastNotify = useToast();
+      weatherService
         .getWeatherByCity(this.city)
         .then((weather: WeatherComponentData) => {
           this.commonInfo = { ...weather.commonInfo };
@@ -163,14 +163,15 @@ export default defineComponent({
         })
         .catch((error) => {
           this.deleteCity(this.city);
-          this.toastNotify.error("City not found");
+          toastNotify.error("City not found");
           console.error(error);
         });
     },
     fetchForecast(): void {
       if (!this.city) return;
 
-      this.weatherService
+      const weatherService = new WeatherService();
+      weatherService
         .getForecastWeather(this.city)
         .then((forecast: ForecastComponentData[]) => {
           this.forecast = [...forecast];

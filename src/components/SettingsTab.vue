@@ -91,7 +91,6 @@ export default defineComponent({
       addDisabled: true,
       autocompleteList: [],
       listCityIndex: -1,
-      locationService: new LocationService(),
     };
   },
   computed: {
@@ -117,9 +116,11 @@ export default defineComponent({
   methods: {
     ...mapMutations(["addCity", "deleteCity"]),
     getAutocompleteList(query: string): void {
-      this.locationService.getCitiesList(query).then((cities) => {
+      const locationService = new LocationService();
+
+      locationService.getCitiesList(query).then((cities: string[]) => {
         this.autocompleteList = cities.filter(
-          (city) => !this.citiesList.includes(city)
+          (city: string) => !this.citiesList.includes(city)
         );
       });
     },

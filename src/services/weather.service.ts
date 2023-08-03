@@ -5,7 +5,6 @@ import {
   WeatherComponentData,
 } from "@/interfaces/weather.interfaces";
 import ApiService from "./api.service";
-import { AxiosError } from "axios";
 
 export default class WeatherService {
   private _apiService!: ApiService;
